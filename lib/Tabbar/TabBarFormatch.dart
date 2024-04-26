@@ -23,7 +23,6 @@ class _TabBarFormatchState extends State<TabBarFormatch> {
             toolbarHeight: 0,
             automaticallyImplyLeading: false,
             bottom: TabBar(
-
               indicatorColor: Colors.red,
               labelColor: Colors.red,
 
