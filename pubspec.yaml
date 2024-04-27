@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.4
   flutter_screenutil: ^5.9.0
-
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:
@@ -80,7 +80,17 @@ flutter:
     - assets/applogo.png
     - assets/avatar.png
     - assets/right.png
-
+    - assets/newsbg.png
+    - assets/nextnews.png
+    - assets/highlight1.png
+    - assets/videoplay.png
+    - assets/bgfordashboard.png
+    - assets/leftarrow.png
+    - assets/notificationicon.png
+    - assets/linedown.png
+    - assets/lineup.png
+    - assets/redright.png
+    - assets/blueleft.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
