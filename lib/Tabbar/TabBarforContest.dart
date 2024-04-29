@@ -24,8 +24,9 @@ class _TabBarforContestState extends State<TabBarforContest> {
             bottom: TabBar(
               indicatorColor: Colors.red,
               labelColor: Colors.red,
-
+              unselectedLabelColor: Color(0xff535C6E),
               tabs: [
+
                 Tab(text: "Contest (120)",),
                 Tab( text: "My Contest (0)"),
                 Tab( text: "My Team (0)"),

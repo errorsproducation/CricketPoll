@@ -1,3 +1,4 @@
+import 'package:cricketpoll/Screen/Create_Team.dart';
 import 'package:cricketpoll/Tabbar/TabBarforContest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,178 +20,217 @@ class _ContestState extends State<Contest> {
           width: double.infinity,
           height: double.infinity,
 
-          child: Column(
+          child: Stack(
             children: [
-              Container(
-                width: double.infinity,
-                height: 165.h,
-                padding: EdgeInsets.all(16),
-                child: Column(
 
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+              Column(
+                children: [
+
+                  Container(
+                    width: double.infinity,
+                    height: 165.h,
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+
                       children: [
-                        Container(
-                          width: 32.w,
-                          height: 32.h,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(image: AssetImage("assets/leftarrow.png"),
-                            ),
-                          ),
-                        ),
-
-                        Text("Contest",
-                          style: GoogleFonts.inter(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-
-                        Container(
-                          width: 24.w,
-                          height: 24.h,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(image: AssetImage("assets/notificationicon.png"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height:10.h,),
-                    Container(
-                      width: double.infinity,
-                      height: 50.h,
-
-
-                      child: Stack(
-                        children: [
-
-                          Align(
-                            alignment:Alignment.center,
-                            child: Text("VS",
-                              style: GoogleFonts.inter(
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                                fontSize: 24,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 32.w,
+                              height: 32.h,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(image: AssetImage("assets/leftarrow.png"),
+                                ),
                               ),
                             ),
-                          ),
 
-                          Row(
-                            children: [
-                              Container(
-                                width:140,
-                                height:38,
+                            Text("Contest",
+                              style: GoogleFonts.inter(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
 
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 34,
-                                      width: 34,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(image: AssetImage("assets/dclogo.png"),
-                                          fit: BoxFit.fill,
-                                        ),
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width:05,
-                                    ),
-                                    Text("BAD",
-                                      style: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                      ),
-                                    ),
-
-                                  ],
+                            Container(
+                              width: 24.w,
+                              height: 24.h,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(image: AssetImage("assets/notificationicon.png"),
                                 ),
-                                decoration: BoxDecoration(
+                              ),
+                            ),
+                          ],
+                        ),
 
-                                  image: DecorationImage(image: AssetImage("assets/blueleft.png"),
-                                    fit: BoxFit.fill,
+                        SizedBox(height:10.h,),
+                        Container(
+                          width: double.infinity,
+                          height: 50.h,
+
+
+                          child: Stack(
+                            children: [
+
+                              Align(
+                                alignment:Alignment.center,
+                                child: Text("VS",
+                                  style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                    fontSize: 24,
                                   ),
                                 ),
-
                               ),
 
-
-                              Expanded(child: Row(
-                                mainAxisAlignment:  MainAxisAlignment.end,
+                              Row(
                                 children: [
                                   Container(
                                     width:140,
-                                    height:45,
+                                    height:38,
+
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Text("SOH",
+                                        Container(
+                                          height: 34,
+                                          width: 34,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(image: AssetImage("assets/dclogo.png"),
+                                              fit: BoxFit.fill,
+                                            ),
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width:05,
+                                        ),
+                                        Text("BAD",
                                           style: GoogleFonts.inter(
                                               fontWeight: FontWeight.w600,
                                               color: Colors.white,
                                               fontSize: 14,
                                           ),
                                         ),
-                                        SizedBox(
-                                          width:05,
-                                        ),
-                                        Container(
-                                          height: 34,
-                                          width: 34,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(image: AssetImage("assets/gtlogo.png"),
-                                              fit: BoxFit.fill,
-                                            ),
-                                            shape: BoxShape.circle,
-                                          ),
-                                        ),
-
-
 
                                       ],
                                     ),
                                     decoration: BoxDecoration(
 
-                                      image: DecorationImage(image: AssetImage("assets/red.png"),
+                                      image: DecorationImage(image: AssetImage("assets/blueleft.png"),
                                         fit: BoxFit.fill,
                                       ),
                                     ),
 
                                   ),
-                                ],))
+
+
+                                  Expanded(child: Row(
+                                    mainAxisAlignment:  MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        width:140,
+                                        height:45,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Text("SOH",
+                                              style: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width:05,
+                                            ),
+                                            Container(
+                                              height: 34,
+                                              width: 34,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(image: AssetImage("assets/gtlogo.png"),
+                                                  fit: BoxFit.fill,
+                                                ),
+                                                shape: BoxShape.circle,
+                                              ),
+                                            ),
+
+
+
+                                          ],
+                                        ),
+                                        decoration: BoxDecoration(
+
+                                          image: DecorationImage(image: AssetImage("assets/red.png"),
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+
+                                      ),
+                                    ],))
+                                ],
+                              ),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height:10.h,),
+                        ),
+                        SizedBox(height:10.h,),
 
-                    Text("10h 10min Left",
-                      style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff4CAF50),
-                        fontSize: 12,
-                      ),
+                        Text("10h 10min Left",
+                          style: GoogleFonts.inter(
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff4CAF50),
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xff10081C),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(16),
-                    bottomRight: Radius.circular(16),
-                  )
-                ),
+                    decoration: BoxDecoration(
+                      color: Color(0xff10081C),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(16),
+                        bottomRight: Radius.circular(16),
+                      )
+                    ),
+                  ),
+
+
+                  Expanded(child: TabBarforContest()),
+                ],
               ),
 
 
-              Expanded(child: TabBarforContest()),
+             Align(
+               alignment: Alignment.bottomCenter,
+               child: InkWell(
+                 onTap: () {
+                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Create_Team(),));
+                 },
+                 child: Container(
+                   margin: EdgeInsets.all(20),
+                   width: 184.w,
+                   height: 50.h,
+                   child: Center(
+                     child: Text("CREATE TEAM",
+                       style: GoogleFonts.inter(
+                         fontWeight: FontWeight.w700,
+                         color: Colors.white,
+                         fontSize: 16.sp,
+                       ),
+                     ),
+                   ),
+                   decoration: BoxDecoration(
+                     gradient: LinearGradient(
+                       colors: [Color(0xffFF7020),Color(0xffF63936),Color(0xffED044A)],
+                       begin: Alignment.centerLeft,
+                       end: Alignment.centerRight,
+                     ),
+                     borderRadius: BorderRadius.circular(25),
+                   ),
+                 ),
+               ),
+             ),
             ],
           ),
         ),

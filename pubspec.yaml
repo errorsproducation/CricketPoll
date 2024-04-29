@@ -91,7 +91,16 @@ flutter:
     - assets/lineup.png
     - assets/redright.png
     - assets/blueleft.png
-
+    - assets/dollar.png
+    - assets/trophy.png
+    - assets/verify.png
+    - assets/coin.png
+    - assets/arrowleftcreate_team.png
+    - assets/helmet.png
+    - assets/decrease.png
+    - assets/dhoni.png
+    - assets/virat.png
+    - assets/rahul.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

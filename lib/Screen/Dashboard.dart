@@ -35,9 +35,12 @@ class _DashboardState extends State<Dashboard> {
               child: Column(
                 children: [
                   Container(
+              width:double.infinity,
                        decoration: BoxDecoration(
                          image: DecorationImage(image: AssetImage("assets/bgfordashboard.png",
+
                          ),
+                         fit: BoxFit.fitWidth,
                          alignment: Alignment.topCenter,),
                        ),
                        // color: Colors.lightBlueAccent,
