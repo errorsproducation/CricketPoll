@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Screen/Dashboard.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ProviderScope(
+    child: MyApp(),
+  ),
+  );
 }
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

@@ -1,31 +1,51 @@
+import 'package:cricketpoll/Notifier/Create_Team_Notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Model/ContestTeamModel.dart';
 
-class Contest_Team_List extends StatefulWidget {
-  const Contest_Team_List({super.key});
+
+
+final downloadProvider = ChangeNotifierProvider<Create_Team_Notifier>((ref) {
+  return Create_Team_Notifier();
+});
+
+class Contest_Team_List extends ConsumerWidget {
+  List<ContestModel> l=[ContestModel("assets/dhoni.png", "BAD", "MS DHONI", "74", "8.5"),ContestModel("assets/virat.png", "BAD", "KOHALI", "893", "6.5"),ContestModel("assets/rahul.png", "SOH", "KL RAHUL", "9300", "2.5")];
+  List<String> selected_players=[];
+  bool iselementinlist=false;
+  String selected_name=" ";
+  Color c1=Colors.black;
+  Color c2=Colors.white;
 
   @override
-  State<Contest_Team_List> createState() => _Contest_Team_ListState();
-}
-
-class _Contest_Team_ListState extends State<Contest_Team_List> {
-  
-  List<ContestModel> l=[ContestModel("assets/dhoni.png", "BAD", "MS DHONI", "74", "8.5"),ContestModel("assets/virat.png", "BAD", "KOHALI", "893", "6.5"),ContestModel("assets/rahul.png", "SOH", "KL RAHUL", "9300", "2.5"),ContestModel("assets/dhoni.png", "BAD", "MS DHONI", "74", "8.5"),ContestModel("assets/virat.png", "BAD", "KOHALI", "893", "6.5"),ContestModel("assets/rahul.png", "SOH", "KL RAHUL", "9300", "2.5")];
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final data=ref.watch(downloadProvider);
     return  Scaffold(
       body: Stack(
         children: [
-
-          Expanded(
-            child: ListView.builder(itemBuilder: (context, index) {
-              return Padding(
+          ListView.builder(itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+               if(ref.watch(downloadProvider).selected_players.contains(l[index].name)){
+                 ref.watch(downloadProvider).remove(l[index].name);
+                 print(ref.watch(downloadProvider).listlength());
+                 print("remoove");
+                 print(ref.watch(downloadProvider).selected_players);
+               }
+               else if(!ref.watch(downloadProvider).selected_players.contains(l[index].name)){
+                 ref.watch(downloadProvider).add(l[index].name);
+                 print(ref.watch(downloadProvider).listlength());
+                 print(ref.watch(downloadProvider).selected_players);
+                 print("add");
+               }
+               
+              },
+              child: Padding(
                 padding: const EdgeInsets.only(
-                    left:16.0,
+                  left:16.0,
                   right: 16.0,
                   top: 10,
                   bottom: 10,
@@ -33,6 +53,7 @@ class _Contest_Team_ListState extends State<Contest_Team_List> {
                 child: Container(
                   width: double.infinity,
                   height:  71.h,
+                  color: data.color(l[index].name),
                   child: Row(
                     children: [
                       Container(
@@ -150,39 +171,16 @@ class _Contest_Team_ListState extends State<Contest_Team_List> {
                     ],
                   ),
                 ),
-              );
-            },
+              ),
+            );
+          },
             itemCount: l.length,
-            ),
           ),
 
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: EdgeInsets.all(20),
-              width: 135.w,
-              height: 50.h,
-              child: Center(
-                child: Text("NEXT",
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                  ),
-                ),
-              ),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xffFF7020),Color(0xffF63936),Color(0xffED044A)],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: BorderRadius.circular(25),
-              ),
-            ),
-          ),
+
         ],
       ),
     );
   }
 }
+

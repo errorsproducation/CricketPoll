@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^4.0.4
   flutter_screenutil: ^5.9.0
   flutter_switch: ^0.3.2
+  flutter_riverpod: ^2.5.1
 
 dev_dependencies:
   flutter_test:
@@ -63,44 +64,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/gtlogo.png
-    - assets/dclogo.png
-    - assets/newsimage.jpg
-    - assets/sliderimage.png
-    - assets/watchbutton.png
-    - assets/play.png
-    - assets/Rect.png
-    - assets/Subtract.png
-    - assets/blue.png
-    - assets/red.png
-    - assets/timeoutline.png
-    - assets/switch.png
-    - assets/england.png
-    - assets/india.png
-    - assets/applogo.png
-    - assets/avatar.png
-    - assets/right.png
-    - assets/newsbg.png
-    - assets/nextnews.png
-    - assets/highlight1.png
-    - assets/videoplay.png
-    - assets/bgfordashboard.png
-    - assets/leftarrow.png
-    - assets/notificationicon.png
-    - assets/linedown.png
-    - assets/lineup.png
-    - assets/redright.png
-    - assets/blueleft.png
-    - assets/dollar.png
-    - assets/trophy.png
-    - assets/verify.png
-    - assets/coin.png
-    - assets/arrowleftcreate_team.png
-    - assets/helmet.png
-    - assets/decrease.png
-    - assets/dhoni.png
-    - assets/virat.png
-    - assets/rahul.png
+    - assets/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
