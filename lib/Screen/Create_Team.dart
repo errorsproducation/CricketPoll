@@ -59,7 +59,7 @@ class _Create_TeamState extends State<Create_Team> {
                                             style: GoogleFonts.inter(
                                               fontWeight: FontWeight.w400,
                                               color: Color(0xff9D91AB),
-                                              fontSize: 12,
+                                              fontSize: 12.sp,
                                             ),
                                           ),
                                           Row(
@@ -81,7 +81,7 @@ class _Create_TeamState extends State<Create_Team> {
                                                 style: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w600,
                                                   color: Colors.white,
-                                                  fontSize: 14,
+                                                  fontSize: 14.sp,
                                                 ),
                                               ),
                                             ],
@@ -102,14 +102,14 @@ class _Create_TeamState extends State<Create_Team> {
                                     style: GoogleFonts.inter(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 16.sp,
                                     ),
                                   ),
                                   Text("10h 10min Left",
                                     style: GoogleFonts.inter(
                                       fontWeight: FontWeight.w400,
                                       color: Color(0xff4CAF50),
-                                      fontSize: 12,
+                                      fontSize: 12.sp,
                                     ),
                                   ),
                                 ],
@@ -146,14 +146,14 @@ class _Create_TeamState extends State<Create_Team> {
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w400,
                                         color: Color(0xff9D91AB),
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                       ),
                                     ),
                                     Text("02",
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white,
-                                        fontSize: 14,
+                                        fontSize: 14.sp,
                                       ),
                                     ),
                                   ],
@@ -170,7 +170,7 @@ class _Create_TeamState extends State<Create_Team> {
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w400,
                                         color: Color(0xff9D91AB),
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                       ),
                                     ),
                                     Row(
@@ -184,20 +184,20 @@ class _Create_TeamState extends State<Create_Team> {
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 05,
+                                          width: 05.w,
                                         ),
                                         Text("${ref.watch(downloadProvider).listlength()}",
                                           style: GoogleFonts.inter(
                                             fontWeight: FontWeight.w600,
                                             color: Colors.white,
-                                            fontSize: 12,
+                                            fontSize: 12.sp,
                                           ),
                                         ),
                                         Text("/11",
                                           style: GoogleFonts.inter(
                                             fontWeight: FontWeight.w500,
                                             color: Color(0xff9D91AB),
-                                            fontSize: 14,
+                                            fontSize: 14.sp,
                                           ),
                                         ),
                                       ],
@@ -220,14 +220,14 @@ class _Create_TeamState extends State<Create_Team> {
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w400,
                                         color: Color(0xff9D91AB),
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                       ),
                                     ),
                                     Text("02",
                                       style: GoogleFonts.inter(
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white,
-                                        fontSize: 14,
+                                        fontSize: 14.sp,
                                       ),
                                     ),
                                   ],
@@ -428,7 +428,7 @@ class _Create_TeamState extends State<Create_Team> {
 
                             InkWell(
                               onTap: () {
-                                ref.watch(downloadProvider).selected_players.clear();
+                                ref.watch(downloadProvider).clearlist();
                               },
                               child: Container(
                                 width:24,
