@@ -39,6 +39,8 @@ dependencies:
   flutter_screenutil: ^5.9.0
   flutter_switch: ^0.3.2
   flutter_riverpod: ^2.5.1
+  flutter_vlc_player: ^7.4.1
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:

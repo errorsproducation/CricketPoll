@@ -1,3 +1,4 @@
+import 'package:cricketpoll/Screen/Video_Player_Page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -251,7 +252,7 @@ class Create_Team_Choose_Players_List extends ConsumerWidget {
             alignment: Alignment.bottomCenter,
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Create_Team_Choose_Captain(),));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Video_Player_Page(),));
               },
               child: Container(
                 margin: EdgeInsets.all(20),

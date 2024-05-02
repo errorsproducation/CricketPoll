@@ -3,6 +3,7 @@ import 'package:cricketpoll/Screen/NewsPage.dart';
 import 'package:cricketpoll/Tabbar/TabBarFormatch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -334,69 +335,99 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                               ),
 
-                          SizedBox(
-                            height:10,
-                          ),
+
 
                               Container(
                                 width: 328,
-                                height: 72,
-                                child: Card(
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
+                                height: 64,
+                                decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      Align(
-                                        alignment:Alignment.centerLeft,
-                                        child: Container(
-                                          width: 64,
-                                          height: 64,
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
 
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(image: AssetImage("assets/india.png"),fit: BoxFit.fill,),
-                                            borderRadius: BorderRadius.circular(16),
-                                          ),
+                                      color: Color(0x22000000), // Black color with 8% opacity
+                                      offset: Offset(0, 2), // X: 0, Y: 2
+                                      blurRadius: 10, // Blur radius
+                                      spreadRadius: 0, // Spread radius
+
+                                    ),
+                                  ],
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Align(
+                                      alignment:Alignment.centerLeft,
+                                      child: Container(
+                                        width: 64,
+                                        height: 64,
+
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(image: AssetImage("assets/india.png"),fit: BoxFit.fill,),
+                                          borderRadius: BorderRadius.circular(16),
                                         ),
                                       ),
-                                      Align(
-                                        alignment:Alignment.centerRight,
-                                        child: Container(
-                                          width: 64,
-                                          height: 64,
+                                    ),
+                                    Align(
+                                      alignment:Alignment.centerRight,
+                                      child: Container(
+                                        width: 64,
+                                        height: 64,
 
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(image: AssetImage("assets/england.png"),fit: BoxFit.fill,),
-                                            borderRadius: BorderRadius.circular(16),
-                                          ),
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(image: AssetImage("assets/england.png"),fit: BoxFit.fill,),
+                                          borderRadius: BorderRadius.circular(16),
                                         ),
                                       ),
+                                    ),
 
 
-                                      Row(
+                                    Row(
+                                      children: [
+                                        SizedBox(width:10,),
+                                      Container(
+                                        width:40,
+                                        height:40,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(image: AssetImage("assets/dclogo.png"),fit: BoxFit.fill,),
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                        Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text("India",
+                                              style: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.black,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                            Text("208-1 (19.5)",
+                                              style: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.black,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Expanded(child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
-                                          SizedBox(width:10,),
-                                        Container(
-                                          width:40,
-                                          height:40,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(image: AssetImage("assets/dclogo.png"),fit: BoxFit.fill,),
-                                            shape: BoxShape.circle,
-                                          ),
-                                        ),
                                           Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
-                                              Text("India",
+                                              Text("England",
                                                 style: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w400,
                                                   color: Colors.black,
                                                   fontSize: 14,
                                                 ),
                                               ),
-                                              Text("208-1 (19.5)",
+                                              Text("105-1 (20)",
                                                 style: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w500,
                                                   color: Colors.black,
@@ -405,48 +436,24 @@ class _DashboardState extends State<Dashboard> {
                                               ),
                                             ],
                                           ),
-                                          Expanded(child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.end,
-                                              children: [
-                                                Text("England",
-                                                  style: GoogleFonts.inter(
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                                Text("105-1 (20)",
-                                                  style: GoogleFonts.inter(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
 
-                                            Container(
-                                              width:40,
-                                              height:40,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(image: AssetImage("assets/gtlogo.png"),fit: BoxFit.fill,),
-                                                shape: BoxShape.circle,
-                                              ),
+                                          Container(
+                                            width:40,
+                                            height:40,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(image: AssetImage("assets/gtlogo.png"),fit: BoxFit.fill,),
+                                              shape: BoxShape.circle,
                                             ),
-
-                                            SizedBox(width:10,),
-                                          ],
-                                          ),
                                           ),
 
+                                          SizedBox(width:10,),
                                         ],
-                                      ),
-                                    ],
-                                  ),
+                                        ),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
                               SizedBox(
@@ -454,9 +461,8 @@ class _DashboardState extends State<Dashboard> {
                               ),
 
                               Container(
-                                margin: EdgeInsets.all(15),
+                                margin: EdgeInsets.only(right:15,left:15,bottom:15,),
                                 width: 328,
-                                height: 220,
                                 child: Column(
                                   children: [
                                     Row(
@@ -497,269 +503,276 @@ class _DashboardState extends State<Dashboard> {
                                       },
                                       child: Container(
                                         width: 328,
-                                        height: 185,
-                                        padding: EdgeInsets.all(8),
-                                        child: Card(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(16),
-                                          ),
+                                        height: 170.h,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(16),
                                           color: Colors.white,
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  SizedBox(width:10,),
-                                                  Text("ICC, Champions Trophy",
-                                                    style: GoogleFonts.inter(
-                                                      fontWeight: FontWeight.w500,
-                                                      color: Colors.black,
-                                                      fontSize: 12,
-                                                    ),
+                                          boxShadow: [
+                                            BoxShadow(
+
+                                              color: Color(0x22000000), // Black color with 8% opacity
+                                              offset: Offset(0, 2), // X: 0, Y: 2
+                                              blurRadius: 10, // Blur radius
+                                              spreadRadius: 0, // Spread radius
+
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                SizedBox(width:10,),
+                                                Text("ICC, Champions Trophy",
+                                                  style: GoogleFonts.inter(
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.black,
+                                                    fontSize: 12,
                                                   ),
-                                                  Expanded(child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.end,
-                                                    children: [
-                                                      Container(
-                                                        width: 105,
-                                                        height:25,
-                                                        child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                          children: [
-                                                            Text("Mega",
-                                                              style: GoogleFonts.inter(
-                                                                fontWeight: FontWeight.w400,
-                                                                color: Colors.white,
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                            SizedBox(width:05),
-                                                            Text("₹25k",
-                                                              style: GoogleFonts.inter(
-                                                                fontWeight: FontWeight.w600,
-                                                                color: Colors.white,
-                                                                fontSize: 14,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        decoration: BoxDecoration(
-                                                          image: DecorationImage(image: AssetImage("assets/Subtract.png"),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ))
-                                                ],
-                                              ),
-                                             SizedBox(height:10),
-                                             Container(
-                                               width: 328,
-                                               height: 50,
-                                               padding: EdgeInsets.all(10),
-
-                                               child: Stack(
-                                                 children: [
-                                                   Align(
-                                                     alignment:Alignment.center,
-                                                     child: Text("10h 10min Left",
-                                                       style: GoogleFonts.inter(
-                                                         fontWeight: FontWeight.w500,
-                                                         color: Color(0xff4CAF50),
-                                                         fontSize: 12,
-                                                       ),
-                                                     ),
-                                                   ),
-
-                                                   Row(
-                                                     children: [
-                                                       Container(
-                                                         width:140,
-                                                         height:45,
-                                                         child: Row(
-                                                           mainAxisAlignment: MainAxisAlignment.start,
-                                                           children: [
-                                                             Container(
-                                                               height: 35,
-                                                               width: 35,
-                                                               decoration: BoxDecoration(
-                                                                 image: DecorationImage(image: AssetImage("assets/dclogo.png"),
-                                                                   fit: BoxFit.fill,
-                                                                 ),
-                                                                 shape: BoxShape.circle,
-                                                               ),
-                                                             ),
-                                                             SizedBox(
-                                                               width:05,
-                                                             ),
-                                                             Text("BAD",
-                                                               style: GoogleFonts.inter(
-                                                                   fontWeight: FontWeight.w600,
-                                                                   color: Colors.black,
-                                                                   fontSize: 14
-                                                               ),
-                                                             ),
-                                                           ],
-                                                         ),
-                                                         decoration: BoxDecoration(
-
-                                                           image: DecorationImage(image: AssetImage("assets/blue.png"),
-                                                             fit: BoxFit.fill,
-                                                           ),
-                                                         ),
-
-                                                       ),
-                                                       Expanded(child: Row(
-                                                         mainAxisAlignment:  MainAxisAlignment.end,
-                                                         children: [
-                                                           Container(
-                                                             width:140,
-                                                             height:45,
-                                                             child: Row(
-                                                               mainAxisAlignment: MainAxisAlignment.end,
-                                                               children: [
-                                                                 Text("SOH",
-                                                                   style: GoogleFonts.inter(
-                                                                       fontWeight: FontWeight.w600,
-                                                                       color: Colors.black,
-                                                                       fontSize: 14
-                                                                   ),
-                                                                 ),
-                                                                 SizedBox(
-                                                                   width:05,
-                                                                 ),
-                                                                 Container(
-                                                                   height: 35,
-                                                                   width: 35,
-                                                                   decoration: BoxDecoration(
-                                                                     image: DecorationImage(image: AssetImage("assets/gtlogo.png"),
-                                                                       fit: BoxFit.fill,
-                                                                     ),
-                                                                     shape: BoxShape.circle,
-                                                                   ),
-                                                                 ),
-
-
-
-                                                               ],
-                                                             ),
-                                                             decoration: BoxDecoration(
-
-                                                                 image: DecorationImage(image: AssetImage("assets/red.png"),
-                                                                   fit: BoxFit.fill,
-                                                                 ),
-                                                             ),
-
-                                                           ),
-                                                       ],))
-                                                     ],
-                                                   ),
-                                                 ],
-                                               ),
-                                             ),
-                                              Container(
-                                                width:328,
-                                                height:35,
-                                                padding: EdgeInsets.all(10),
-                                                child: Stack(
+                                                ),
+                                                Expanded(child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
                                                   children: [
-                                                    Align(
-                                                      alignment:Alignment.topCenter,
-                                                      child: Container(
-                                                        width: 60,
-                                                        height: 19,
-                                                        child: Center(
-                                                          child:  Text("5:00 PM",
+                                                    Container(
+                                                      width: 105,
+                                                      height:25,
+                                                      child: Row(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Text("Mega",
                                                             style: GoogleFonts.inter(
-                                                                fontWeight: FontWeight.w600,
-                                                                color: Color(0xffF44336),
-                                                                fontSize: 10,
+                                                              fontWeight: FontWeight.w400,
+                                                              color: Colors.white,
+                                                              fontSize: 12,
                                                             ),
                                                           ),
-                                                        ),
-                                                        decoration: BoxDecoration(
-                                                          image: DecorationImage(image: AssetImage("assets/timeoutline.png"),
+                                                          SizedBox(width:05),
+                                                          Text("₹25k",
+                                                            style: GoogleFonts.inter(
+                                                              fontWeight: FontWeight.w600,
+                                                              color: Colors.white,
+                                                              fontSize: 14,
+                                                            ),
                                                           ),
-                                                          borderRadius: BorderRadius.circular(16.67),
+                                                        ],
+                                                      ),
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(image: AssetImage("assets/Subtract.png"),
                                                         ),
                                                       ),
-                                                    ),
-
-                                                    Row(
-                                                      children: [
-                                                        Text("Badalona CC",
-                                                          style: GoogleFonts.inter(
-                                                            fontWeight: FontWeight.w400,
-                                                            color: Color(0xff878D9A),
-                                                            fontSize: 12,
-                                                          ),
-                                                        ),
-                                                        Expanded(child: Row(
-                                                          mainAxisAlignment:  MainAxisAlignment.end,
-                                                          children: [
-                                                            Text("Sohal ",
-                                                              style: GoogleFonts.inter(
-                                                                fontWeight: FontWeight.w400,
-                                                                color: Color(0xff878D9A),
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                          ],))
-                                                      ],
                                                     ),
                                                   ],
-                                                ),
-                                              ),
-                                              Divider(),
+                                                ))
+                                              ],
+                                            ),
+                                           SizedBox(height:10),
+                                           Container(
+                                             width: 328,
+                                             height: 50,
+                                             padding: EdgeInsets.all(10),
 
-                                              Expanded(child: Row(
+                                             child: Stack(
+                                               children: [
+                                                 Align(
+                                                   alignment:Alignment.center,
+                                                   child: Text("10h 10min Left",
+                                                     style: GoogleFonts.inter(
+                                                       fontWeight: FontWeight.w500,
+                                                       color: Color(0xff4CAF50),
+                                                       fontSize: 12,
+                                                     ),
+                                                   ),
+                                                 ),
+
+                                                 Row(
+                                                   children: [
+                                                     Container(
+                                                       width:140,
+                                                       height:45,
+                                                       child: Row(
+                                                         mainAxisAlignment: MainAxisAlignment.start,
+                                                         children: [
+                                                           Container(
+                                                             height: 35,
+                                                             width: 35,
+                                                             decoration: BoxDecoration(
+                                                               image: DecorationImage(image: AssetImage("assets/dclogo.png"),
+                                                                 fit: BoxFit.fill,
+                                                               ),
+                                                               shape: BoxShape.circle,
+                                                             ),
+                                                           ),
+                                                           SizedBox(
+                                                             width:05,
+                                                           ),
+                                                           Text("BAD",
+                                                             style: GoogleFonts.inter(
+                                                                 fontWeight: FontWeight.w600,
+                                                                 color: Colors.black,
+                                                                 fontSize: 14
+                                                             ),
+                                                           ),
+                                                         ],
+                                                       ),
+                                                       decoration: BoxDecoration(
+
+                                                         image: DecorationImage(image: AssetImage("assets/blue.png"),
+                                                           fit: BoxFit.fill,
+                                                         ),
+                                                       ),
+
+                                                     ),
+                                                     Expanded(child: Row(
+                                                       mainAxisAlignment:  MainAxisAlignment.end,
+                                                       children: [
+                                                         Container(
+                                                           width:140,
+                                                           height:45,
+                                                           child: Row(
+                                                             mainAxisAlignment: MainAxisAlignment.end,
+                                                             children: [
+                                                               Text("SOH",
+                                                                 style: GoogleFonts.inter(
+                                                                     fontWeight: FontWeight.w600,
+                                                                     color: Colors.black,
+                                                                     fontSize: 14
+                                                                 ),
+                                                               ),
+                                                               SizedBox(
+                                                                 width:05,
+                                                               ),
+                                                               Container(
+                                                                 height: 35,
+                                                                 width: 35,
+                                                                 decoration: BoxDecoration(
+                                                                   image: DecorationImage(image: AssetImage("assets/gtlogo.png"),
+                                                                     fit: BoxFit.fill,
+                                                                   ),
+                                                                   shape: BoxShape.circle,
+                                                                 ),
+                                                               ),
+
+
+
+                                                             ],
+                                                           ),
+                                                           decoration: BoxDecoration(
+
+                                                               image: DecorationImage(image: AssetImage("assets/red.png"),
+                                                                 fit: BoxFit.fill,
+                                                               ),
+                                                           ),
+
+                                                         ),
+                                                     ],))
+                                                   ],
+                                                 ),
+                                               ],
+                                             ),
+                                           ),
+                                            Container(
+                                              width:328,
+                                              height:35,
+                                              padding: EdgeInsets.all(10),
+                                              child: Stack(
                                                 children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.only(
-                                                    left: 8,
-                                                  ),
-                                                  child: Text("Match alert (before 10h 10min )",
-                                                    style: GoogleFonts.inter(
-                                                      fontWeight: FontWeight.w500,
-                                                      color: Color(0xff535C6E),
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ),
-
-                                                  Expanded(
-                                                      child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.end,
-                                                    children: [
-                                                      Padding(
-                                                        padding: const EdgeInsets.only(right:8.0),
-                                                        child: Container(
-                                                            child:  FlutterSwitch(
-                                                              width: 31.67,
-                                                              height: 19.17,
-                                                              valueFontSize: 12.0,
-                                                              toggleSize: 16.83,
-                                                              padding: 0,
-                                                              toggleColor: Color(0xffF44336),
-                                                              borderRadius: 16.67,
-                                                              value: switchb,
-                                                              inactiveColor: Color(0xffE2E3E8),
-                                                              activeColor: Color(0xffF44336).withOpacity(0.2),
-                                                              onToggle: (val) {
-                                                                setState(() {
-                                                                  switchb = val;
-                                                                });
-                                                              },
-                                                            ),
+                                                  Align(
+                                                    alignment:Alignment.topCenter,
+                                                    child: Container(
+                                                      width: 60,
+                                                      height: 19,
+                                                      child: Center(
+                                                        child:  Text("5:00 PM",
+                                                          style: GoogleFonts.inter(
+                                                              fontWeight: FontWeight.w600,
+                                                              color: Color(0xffF44336),
+                                                              fontSize: 10,
+                                                          ),
                                                         ),
                                                       ),
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(image: AssetImage("assets/timeoutline.png"),
+                                                        ),
+                                                        borderRadius: BorderRadius.circular(16.67),
+                                                      ),
+                                                    ),
+                                                  ),
+
+                                                  Row(
+                                                    children: [
+                                                      Text("Badalona CC",
+                                                        style: GoogleFonts.inter(
+                                                          fontWeight: FontWeight.w400,
+                                                          color: Color(0xff878D9A),
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                      Expanded(child: Row(
+                                                        mainAxisAlignment:  MainAxisAlignment.end,
+                                                        children: [
+                                                          Text("Sohal ",
+                                                            style: GoogleFonts.inter(
+                                                              fontWeight: FontWeight.w400,
+                                                              color: Color(0xff878D9A),
+                                                              fontSize: 12,
+                                                            ),
+                                                          ),
+                                                        ],))
                                                     ],
-                                                  )),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Divider(),
+
+                                            Expanded(child: Row(
+                                              children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 8,
+                                                ),
+                                                child: Text("Match alert (before 10h 10min )",
+                                                  style: GoogleFonts.inter(
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Color(0xff535C6E),
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ),
+
+                                                Expanded(
+                                                    child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(right:8.0),
+                                                      child: Container(
+                                                          child:  FlutterSwitch(
+                                                            width: 31.67,
+                                                            height: 19.17,
+                                                            valueFontSize: 12.0,
+                                                            toggleSize: 16.83,
+                                                            padding: 0,
+                                                            toggleColor: Color(0xffF44336),
+                                                            borderRadius: 16.67,
+                                                            value: switchb,
+                                                            inactiveColor: Color(0xffE2E3E8),
+                                                            activeColor: Color(0xffF44336).withOpacity(0.2),
+                                                            onToggle: (val) {
+                                                              setState(() {
+                                                                switchb = val;
+                                                              });
+                                                            },
+                                                          ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )),
 
 
-                                              ],)),
+                                            ],)),
 
-                                            ],
-                                          ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -767,9 +780,7 @@ class _DashboardState extends State<Dashboard> {
                                   ],
                                 ),
                               ),
-                          SizedBox(
-                            height: 10,
-                          ),
+
 
                               Container(
                                 margin: EdgeInsets.only(

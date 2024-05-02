@@ -37,7 +37,6 @@ class _Create_Team_Choose_CaptainState extends State<Create_Team_Choose_Captain>
                             ),
                           ),
                         ),
-
                       ],
                     ),
 
@@ -62,7 +61,6 @@ class _Create_Team_Choose_CaptainState extends State<Create_Team_Choose_Captain>
                         ],
                       ),
                     ),
-
                   ],
                 ),
               ),
