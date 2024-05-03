@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cricketpoll/Screen/Contestpage.dart';
 import 'package:cricketpoll/Screen/NewsPage.dart';
 import 'package:cricketpoll/Tabbar/TabBarFormatch.dart';
@@ -5,8 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:http/http.dart' as http;
 import 'MatchScreen.dart';
 
 class Dashboard extends StatefulWidget {
@@ -19,6 +22,18 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
 
   bool switchb=true;
+
+  late VlcPlayerController _controller;
+  late String _videoUrl;
+
+  @override
+  void initState() {
+    super.initState();
+
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -343,6 +358,10 @@ class _DashboardState extends State<Dashboard> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
                                   color: Colors.white,
+                                  border: Border.all(
+                                    color: Colors.grey.withOpacity(0.6),
+                                    width:0.5,
+                                  ),
                                   boxShadow: [
                                     BoxShadow(
 
@@ -507,6 +526,10 @@ class _DashboardState extends State<Dashboard> {
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(16),
                                           color: Colors.white,
+                                          border: Border.all(
+                                            color: Colors.grey.withOpacity(0.6),
+                                            width:0.5,
+                                          ),
                                           boxShadow: [
                                             BoxShadow(
 
@@ -1231,126 +1254,129 @@ class _DashboardState extends State<Dashboard> {
                                           children: [
 
                                             Container(
-                                              width:242,
+                                                 width:242,
                                               height:123,
-                                              child:Card(
-                                                color:Colors.white,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(10.0),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text("ICC, Champions Trophy",
-                                                            style: GoogleFonts.inter(
-                                                              fontWeight: FontWeight.w500,
-                                                              color: Color(0xff10081C),
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-
-                                                          Expanded(child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.end,
-                                                            children: [
-                                                              Text("10/11/2024",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Color(0xff535C6E),
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-
-
-                                                          ],)),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height:13,
-                                                      ),
-
-                                                      Row(
-                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                        children: [
-
-                                                          Column(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Container(
-                                                                width:40,
-                                                                height:40,
-                                                                decoration: BoxDecoration(
-                                                                  image: DecorationImage(image: AssetImage("assets/dclogo.png"),
-                                                                  ),
-                                                                  borderRadius: BorderRadius.circular(16.67),
-                                                                ),
-                                                              ),
-
-                                                              Text("India",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Color(0xff10081C),
-                                                                  fontSize: 14,
-                                                                ),
-                                                              ),
-
-                                                            ],
-                                                          ),
-
-
-                                                          Column(
-                                                            children: [
-                                                              Text("VS",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w700,
-                                                                  color: Color(0xff10081C),
-                                                                  fontSize: 24,
-                                                                ),
-                                                              ),
-                                                              Text("Watch Live",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Color(0xff4CAF50),
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-
-                                                            ],
-                                                          ),
-
-
-                                                          Column(
-                                                            mainAxisAlignment: MainAxisAlignment.end,
-                                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                                            children: [
-                                                              Container(
-                                                                width:40,
-                                                                height:40,
-                                                                decoration: BoxDecoration(
-                                                                  image: DecorationImage(image: AssetImage("assets/gtlogo.png"),
-                                                                  ),
-                                                                  borderRadius: BorderRadius.circular(16.67),
-                                                                ),
-                                                              ),
-
-                                                              Text("England",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Color(0xff10081C),
-                                                                  fontSize: 14,
-                                                                ),
-                                                              ),
-
-                                                            ],
-                                                          ),
-
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(16),
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                  color: Colors.grey.withOpacity(0.6),
+                                                  width:0.5,
                                                 ),
-                                                shape:RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(16),
+                                                
+                                              ),
+                                              child:Padding(
+                                                padding: const EdgeInsets.all(10.0),
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text("ICC, Champions Trophy",
+                                                          style: GoogleFonts.inter(
+                                                            fontWeight: FontWeight.w500,
+                                                            color: Color(0xff10081C),
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                              
+                                                        Expanded(child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.end,
+                                                          children: [
+                                                            Text("10/11/2024",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w500,
+                                                                color: Color(0xff535C6E),
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                              
+                                              
+                                                        ],)),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height:13,
+                                                    ),
+                                              
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                              
+                                                        Column(
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Container(
+                                                              width:40,
+                                                              height:40,
+                                                              decoration: BoxDecoration(
+                                                                image: DecorationImage(image: AssetImage("assets/dclogo.png"),
+                                                                ),
+                                                                borderRadius: BorderRadius.circular(16.67),
+                                                              ),
+                                                            ),
+                                              
+                                                            Text("India",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w500,
+                                                                color: Color(0xff10081C),
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+                                              
+                                                          ],
+                                                        ),
+                                              
+                                              
+                                                        Column(
+                                                          children: [
+                                                            Text("VS",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w700,
+                                                                color: Color(0xff10081C),
+                                                                fontSize: 24,
+                                                              ),
+                                                            ),
+                                                            Text("Watch Live",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w500,
+                                                                color: Color(0xff4CAF50),
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+                                              
+                                                          ],
+                                                        ),
+                                              
+                                              
+                                                        Column(
+                                                          mainAxisAlignment: MainAxisAlignment.end,
+                                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                                          children: [
+                                                            Container(
+                                                              width:40,
+                                                              height:40,
+                                                              decoration: BoxDecoration(
+                                                                image: DecorationImage(image: AssetImage("assets/gtlogo.png"),
+                                                                ),
+                                                                borderRadius: BorderRadius.circular(16.67),
+                                                              ),
+                                                            ),
+                                              
+                                                            Text("England",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w500,
+                                                                color: Color(0xff10081C),
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+                                              
+                                                          ],
+                                                        ),
+                                              
+                                                      ],
+                                                    )
+                                                  ],
                                                 ),
                                               ),
 
@@ -1359,124 +1385,127 @@ class _DashboardState extends State<Dashboard> {
                                             Container(
                                               width:242,
                                               height:123,
-                                              child:Card(
-                                                color:Colors.white,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(10.0),
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Text("ICC, Champions Trophy",
-                                                            style: GoogleFonts.inter(
-                                                              fontWeight: FontWeight.w500,
-                                                              color: Color(0xff10081C),
-                                                              fontSize: 12,
-                                                            ),
-                                                          ),
-
-                                                          Expanded(child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.end,
-                                                            children: [
-                                                              Text("10/11/2024",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Color(0xff535C6E),
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-
-
-                                                            ],)),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height:13,
-                                                      ),
-
-                                                      Row(
-                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                        children: [
-
-                                                          Column(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Container(
-                                                                width:40,
-                                                                height:40,
-                                                                decoration: BoxDecoration(
-                                                                  image: DecorationImage(image: AssetImage("assets/dclogo.png"),
-                                                                  ),
-                                                                  borderRadius: BorderRadius.circular(16.67),
-                                                                ),
-                                                              ),
-
-                                                              Text("India",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Color(0xff10081C),
-                                                                  fontSize: 14,
-                                                                ),
-                                                              ),
-
-                                                            ],
-                                                          ),
-
-
-                                                          Column(
-                                                            children: [
-                                                              Text("VS",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w700,
-                                                                  color: Color(0xff10081C),
-                                                                  fontSize: 24,
-                                                                ),
-                                                              ),
-                                                              Text("Watch Live",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Color(0xff4CAF50),
-                                                                  fontSize: 12,
-                                                                ),
-                                                              ),
-
-                                                            ],
-                                                          ),
-
-
-                                                          Column(
-                                                            mainAxisAlignment: MainAxisAlignment.end,
-                                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                                            children: [
-                                                              Container(
-                                                                width:40,
-                                                                height:40,
-                                                                decoration: BoxDecoration(
-                                                                  image: DecorationImage(image: AssetImage("assets/gtlogo.png"),
-                                                                  ),
-                                                                  borderRadius: BorderRadius.circular(16.67),
-                                                                ),
-                                                              ),
-
-                                                              Text("England",
-                                                                style: GoogleFonts.inter(
-                                                                  fontWeight: FontWeight.w500,
-                                                                  color: Color(0xff10081C),
-                                                                  fontSize: 14,
-                                                                ),
-                                                              ),
-
-                                                            ],
-                                                          ),
-
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(16),
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                  color: Colors.grey.withOpacity(0.6),
+                                                  width:0.5,
                                                 ),
-                                                shape:RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(16),
+                                                
+                                              ),
+                                              child:Padding(
+                                                padding: const EdgeInsets.all(10.0),
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text("ICC, Champions Trophy",
+                                                          style: GoogleFonts.inter(
+                                                            fontWeight: FontWeight.w500,
+                                                            color: Color(0xff10081C),
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+
+                                                        Expanded(child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.end,
+                                                          children: [
+                                                            Text("10/11/2024",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w500,
+                                                                color: Color(0xff535C6E),
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+
+
+                                                          ],)),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height:13,
+                                                    ),
+
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+
+                                                        Column(
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Container(
+                                                              width:40,
+                                                              height:40,
+                                                              decoration: BoxDecoration(
+                                                                image: DecorationImage(image: AssetImage("assets/dclogo.png"),
+                                                                ),
+                                                                borderRadius: BorderRadius.circular(16.67),
+                                                              ),
+                                                            ),
+
+                                                            Text("India",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w500,
+                                                                color: Color(0xff10081C),
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+
+                                                          ],
+                                                        ),
+
+
+                                                        Column(
+                                                          children: [
+                                                            Text("VS",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w700,
+                                                                color: Color(0xff10081C),
+                                                                fontSize: 24,
+                                                              ),
+                                                            ),
+                                                            Text("Watch Live",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w500,
+                                                                color: Color(0xff4CAF50),
+                                                                fontSize: 12,
+                                                              ),
+                                                            ),
+
+                                                          ],
+                                                        ),
+
+
+                                                        Column(
+                                                          mainAxisAlignment: MainAxisAlignment.end,
+                                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                                          children: [
+                                                            Container(
+                                                              width:40,
+                                                              height:40,
+                                                              decoration: BoxDecoration(
+                                                                image: DecorationImage(image: AssetImage("assets/gtlogo.png"),
+                                                                ),
+                                                                borderRadius: BorderRadius.circular(16.67),
+                                                              ),
+                                                            ),
+
+                                                            Text("England",
+                                                              style: GoogleFonts.inter(
+                                                                fontWeight: FontWeight.w500,
+                                                                color: Color(0xff10081C),
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+
+                                                          ],
+                                                        ),
+
+                                                      ],
+                                                    )
+                                                  ],
                                                 ),
                                               ),
 
