@@ -252,7 +252,7 @@ class Create_Team_Choose_Players_List extends ConsumerWidget {
             alignment: Alignment.bottomCenter,
             child: InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Video_Player_Page(),));
+
               },
               child: Container(
                 margin: EdgeInsets.all(20),

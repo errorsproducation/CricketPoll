@@ -2,14 +2,17 @@ import 'dart:convert';
 
 import 'package:cricketpoll/Screen/Contestpage.dart';
 import 'package:cricketpoll/Screen/NewsPage.dart';
+import 'package:cricketpoll/Screen/Video_Player_Page.dart';
 import 'package:cricketpoll/Tabbar/TabBarFormatch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'MatchScreen.dart';
 
 class Dashboard extends StatefulWidget {
@@ -23,9 +26,46 @@ class _DashboardState extends State<Dashboard> {
 
   bool switchb=true;
 
-  late VlcPlayerController _controller;
-  late String _videoUrl;
+  final FlutterFFmpeg _flutterFFmpeg = FlutterFFmpeg();
+  var hlsStream;
 
+
+
+  Future<String> convertToHLS() async {
+    // Initialize YouTubeExplode
+    final yt = YoutubeExplode();
+
+    try {
+      // Get video ID
+
+      // Get video details
+      var video = await yt.videos.get('PPwJ75vqP_s');
+
+      // Get video streams
+      var streams = await yt.videos.streamsClient.getManifest('PPwJ75vqP_s');
+
+      // Find the best stream with HLS format
+      hlsStream= streams.muxed.withHighestBitrate();
+
+      // Get temporary directory path
+      /*var tempDirPath = await getTemporaryDirectoryPath();
+
+      // Output path for the converted HLS file
+      var outputPath = '$tempDirPath/${'KPO9i300l2I'}_converted.m3u8';
+
+      // Download and convert to HLS
+      print("${hlsStream.url}");
+      await _flutterFFmpeg.execute('-i ${hlsStream.url} -c copy -bsf:a aac_adtstoasc $outputPath');
+
+      print('Conversion completed successfully. Output path: $outputPath');
+      */
+    } finally {
+      // Close YouTubeExplode
+      yt.close();
+    }
+
+    return hlsStream.url.toString();
+  }
   @override
   void initState() {
     super.initState();
@@ -517,8 +557,9 @@ class _DashboardState extends State<Dashboard> {
                                       height: 10,
                                     ),
                                     InkWell(
-                                      onTap:() {
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Contest()));
+                                      onTap:() async {
+                                        String u=await convertToHLS();
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Video_Player_Page(u)));
                                       },
                                       child: Container(
                                         width: 328,

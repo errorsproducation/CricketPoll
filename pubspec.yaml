@@ -46,6 +46,7 @@ dependencies:
   youtube_player_iframe: ^4.0.4
   flutter_ffmpeg: ^0.4.0
   path_provider: ^2.0.2
+  floating: ^2.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
