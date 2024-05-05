@@ -84,168 +84,92 @@ class _Video_Player_PageState extends State<Video_Player_Page> {
   Widget build(BuildContext context) {
 
 
-    return OrientationBuilder(
-      builder: (context, orientation) {
-        return orientation==Orientation.landscape?Expanded(child: VlcPlayer(
-          controller: _videoPlayerController, // Controler that we created earlier
-          aspectRatio: 16 / 9,
-          // Aspect ratio you want to take in screen
-        ),):PiPSwitcher(
-          childWhenEnabled:VlcPlayer(
-            controller: _videoPlayerController, // Controler that we created earlier
-            aspectRatio: 16 / 9,
-            // Aspect ratio you want to take in screen
-          ),
-          childWhenDisabled: SafeArea(
-            child: Scaffold(
-              body: Container(
+    return PiPSwitcher(
+      childWhenEnabled: Container(
+
+        child: Container(
+
+        ),
+      ),
+      childWhenDisabled: Scaffold(
+        body: Stack(
+          children: [
+            Container(
+              child: VlcPlayer(
+                controller: _videoPlayerController, // Controler that we created earlier
+                aspectRatio: 16 / 9,
+                // Aspect ratio you want to take in screen
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
                 width: double.infinity,
-                height: double.infinity,
-                child: Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 142.h,
-                      color: Color(0xff10081C),
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          Stack(
-                            children: [
-                              InkWell(
-                                onTap:()  async {
-                                  await floating.enable(aspectRatio: Rational.landscape());
-                                },
-                                child: Container(
-                                  width: 32.w,
-                                  height: 32.h,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(image: AssetImage("assets/leftarrow.png"),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                height: 100,
+                color: Colors.black,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 30,
+                        color: Colors.black,
+                        child: SliderTheme(
+                          data: SliderThemeData(
+                              thumbColor: Colors.orange,
+                              //thumbShape: SliderComponentShape.noThumb,
+                              overlayShape: SliderComponentShape.noOverlay),
+                          child: Slider(
 
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text("IND vs PAK",
-                                  style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
+                              value: value,
+                              max: max,
+                              activeColor: Colors.white,
+                              inactiveColor: const Color(0x4fffffff),
+                              label: '${value}',
+                              onChanged: (double newValue) {
+                                setState(() {
+                                  value=newValue;
+                                  print("minduration :$value");
+                                  print("newvalue : $newValue");
+                                  print("newvalue : ${newValue.toInt()}");
 
-
-                            ],
-                          ),
-
-                          SizedBox(
-                            height: 10,
-                          ),
-                          InkWell(
-                            onTap: () {
-
-                            },
-                            child: Container(
-                              width: 192.w,
-                              height: 38.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(21),
-                                color: Colors.white.withOpacity(0.2),
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 95.w,
-                                    height: 38.h,
-                                    child: Center(
-                                      child: Text("Watch",
-                                        style: GoogleFonts.inter(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                          fontSize: 14.sp,
-                                        ),
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(21),
-                                      gradient: LinearGradient(
-                                        colors: [Color(0xffFF7020),Color(0xffF63936),Color(0xffED044A)],
-                                        begin: Alignment.centerLeft,
-                                        end: Alignment.centerRight,
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(child: Stack(
-                                    children: [
-                                      Align(
-                                        alignment:Alignment.center,
-                                        child: Text("Scores",
-                                          style: GoogleFonts.inter(
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.white.withOpacity(0.6),
-                                            fontSize: 14.sp,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  ),
-
-                                ],
-                              ),
-                            ),
-                          ),
-
-                        ],
+                                });
+                              },
+                              semanticFormatterCallback: (double newValue) {
+                                return '${newValue.round()}';
+                              }),
+                        ),
                       ),
-                    ),
-
-                    VlcPlayer(
-                      controller: _videoPlayerController, // Controler that we created earlier
-                      aspectRatio: 16 / 9,
-                      // Aspect ratio you want to take in screen
-                    ),
-
-                    Container(
-                      height: 30,
-                      color: Colors.black,
-                      child: SliderTheme(
-                        data: SliderThemeData(
-                            thumbColor: Colors.orange,
-                            //thumbShape: SliderComponentShape.noThumb,
-                            overlayShape: SliderComponentShape.noOverlay),
-                        child: Slider(
-
-                            value: value,
-                            max: max,
-                            activeColor: Colors.white,
-                            inactiveColor: const Color(0x4fffffff),
-                            label: '${value}',
-                            onChanged: (double newValue) {
-                              setState(() {
-                                value=newValue;
-                                print("minduration :$value");
-                                print("newvalue : $newValue");
-                                print("newvalue : ${newValue.toInt()}");
-
-                              });
-                            },
-                            semanticFormatterCallback: (double newValue) {
-                              return '${newValue.round()}';
-                            }),
-                      ),
-                    ),
-
-                    Container(
-                      width: double.infinity,
-                      height: 100,
-                      color: Colors.black,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
                         children: [
+                          IconButton(onPressed: () async {
+                            setState(() {
+                              SystemChrome.setPreferredOrientations([
+                                DeviceOrientation.landscapeRight,
+                                DeviceOrientation.landscapeLeft,
+                              ]);
+                            });
+                          }, icon: Icon(Icons.fullscreen,
+                            color: Colors.orangeAccent,
+                          ),
+                          ),
+                          IconButton(onPressed: () async {
+                            setState(() {
+                              SystemChrome.setPreferredOrientations([
+                                DeviceOrientation.portraitDown,
+                                DeviceOrientation.portraitUp,
+                              ]);
+                            });
+                          }, icon: Icon(Icons.fullscreen_exit,
+                            color: Colors.orangeAccent,),
+                          ),
+                          IconButton(onPressed: () async {
+                            setState(() {
+                              floating.enable();
+                            });
+                          }, icon: Icon(Icons.picture_in_picture,
+                            color: Colors.orangeAccent,),
+                          ),
                           IconButton(onPressed: () async {
                             _videoPlayerController.pause();
                           }, icon: Icon(Icons.pause,
@@ -286,28 +210,6 @@ class _Video_Player_PageState extends State<Video_Player_Page> {
                             color: Colors.white,),
                           ),
 
-                          IconButton(onPressed: () async {
-                            SystemChrome.setPreferredOrientations([
-                              DeviceOrientation.landscapeLeft,
-                              DeviceOrientation.landscapeRight,
-                            ]);
-                          }, icon: Icon(Icons.fullscreen,
-                            color: Colors.white,),
-                          ),
-
-                        ],
-                      ),
-                    ),
-
-
-
-                    Container(
-                      width: double.infinity,
-                      height: 100,
-                      color: Colors.black,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
                           InkWell(
                             onTap:(){
                               _videoPlayerController.setPlaybackSpeed(0.5);
@@ -337,27 +239,16 @@ class _Video_Player_PageState extends State<Video_Player_Page> {
                               ),
                             ),
                           ),
-
-
                         ],
                       ),
-                    ),
-
-
-
-
-
-
-                    //Expanded(child: TabBarforVideoPlayer()),
-
-
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ),
-        );
-      },
+            )
+          ],
+        ),
+      ),
     );
   }
 
