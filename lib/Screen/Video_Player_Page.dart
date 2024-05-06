@@ -85,7 +85,6 @@ class _Video_Player_PageState extends State<Video_Player_Page> {
             looping: false,
             autoDispose: true,
             controlsConfiguration: BetterPlayerControlsConfiguration(
-              controlBarColor: Colors.blueGrey,
               enablePip: true,
               iconsColor: Colors.white,
             ),
@@ -104,7 +103,7 @@ class _Video_Player_PageState extends State<Video_Player_Page> {
                 looping: false,
                 autoDispose: true,
                 controlsConfiguration: BetterPlayerControlsConfiguration(
-                  controlBarColor: Colors.blueGrey,
+
                   iconsColor: Colors.white,
                   enablePip: true,
                 ),
