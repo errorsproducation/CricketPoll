@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:better_player/better_player.dart';
 import 'package:cricketpoll/Providerdata/ProviderForYouTubeUrl.dart';
 import 'package:cricketpoll/Screen/TryScreen.dart';
 import 'package:cricketpoll/Tabbar/TabBarForVideoPlayer.dart';
@@ -45,19 +46,9 @@ class _Video_Player_PageState extends State<Video_Player_Page> {
     super.initState();
     //_controller.loadVideoById(videoId: "ht72EAmIITA");
     floating=Floating();
-    _videoPlayerController= VlcPlayerController.network(
-      '$url',
-      autoPlay: false,
 
-      options: VlcPlayerOptions(
-        advanced: VlcAdvancedOptions([
-          VlcAdvancedOptions.networkCaching(2000),
-        ]),
-      ),
-    );
-    getdurations();
   }
-  void getdurations(){
+  /*void getdurations(){
     _timer = Timer.periodic(Duration(seconds: 5), (timer) async {
       setState(() {
         max=_videoPlayerController.value.duration.inSeconds.toDouble();
@@ -69,14 +60,14 @@ class _Video_Player_PageState extends State<Video_Player_Page> {
     });
 
   }
+  */
 
 
 
   @override
   void dispose() async {
     super.dispose();
-    await _videoPlayerController.stopRendererScanning();
-    await _videoPlayerController.dispose();
+
   }
 
 
@@ -85,166 +76,48 @@ class _Video_Player_PageState extends State<Video_Player_Page> {
 
 
     return PiPSwitcher(
-      childWhenEnabled: Container(
-
-        child: Container(
-
+      childWhenEnabled: Scaffold(
+        body: BetterPlayer.network(
+          "$url",
+          betterPlayerConfiguration: BetterPlayerConfiguration(
+            aspectRatio: 16 / 9,
+            autoPlay: true,
+            looping: false,
+            autoDispose: true,
+            controlsConfiguration: BetterPlayerControlsConfiguration(
+              controlBarColor: Colors.blueGrey,
+              enablePip: true,
+              iconsColor: Colors.white,
+            ),
+          ),
         ),
       ),
+
       childWhenDisabled: Scaffold(
         body: Stack(
           children: [
-            Container(
-              child: VlcPlayer(
-                controller: _videoPlayerController, // Controler that we created earlier
+            BetterPlayer.network(
+              "$url",
+              betterPlayerConfiguration: BetterPlayerConfiguration(
                 aspectRatio: 16 / 9,
-                // Aspect ratio you want to take in screen
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: double.infinity,
-                height: 100,
-                color: Colors.black,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 30,
-                        color: Colors.black,
-                        child: SliderTheme(
-                          data: SliderThemeData(
-                              thumbColor: Colors.orange,
-                              //thumbShape: SliderComponentShape.noThumb,
-                              overlayShape: SliderComponentShape.noOverlay),
-                          child: Slider(
-
-                              value: value,
-                              max: max,
-                              activeColor: Colors.white,
-                              inactiveColor: const Color(0x4fffffff),
-                              label: '${value}',
-                              onChanged: (double newValue) {
-                                setState(() {
-                                  value=newValue;
-                                  print("minduration :$value");
-                                  print("newvalue : $newValue");
-                                  print("newvalue : ${newValue.toInt()}");
-
-                                });
-                              },
-                              semanticFormatterCallback: (double newValue) {
-                                return '${newValue.round()}';
-                              }),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          IconButton(onPressed: () async {
-                            setState(() {
-                              SystemChrome.setPreferredOrientations([
-                                DeviceOrientation.landscapeRight,
-                                DeviceOrientation.landscapeLeft,
-                              ]);
-                            });
-                          }, icon: Icon(Icons.fullscreen,
-                            color: Colors.orangeAccent,
-                          ),
-                          ),
-                          IconButton(onPressed: () async {
-                            setState(() {
-                              SystemChrome.setPreferredOrientations([
-                                DeviceOrientation.portraitDown,
-                                DeviceOrientation.portraitUp,
-                              ]);
-                            });
-                          }, icon: Icon(Icons.fullscreen_exit,
-                            color: Colors.orangeAccent,),
-                          ),
-                          IconButton(onPressed: () async {
-                            setState(() {
-                              floating.enable();
-                            });
-                          }, icon: Icon(Icons.picture_in_picture,
-                            color: Colors.orangeAccent,),
-                          ),
-                          IconButton(onPressed: () async {
-                            _videoPlayerController.pause();
-                          }, icon: Icon(Icons.pause,
-                            color: Colors.white,
-                          ),
-                          ),
-                          IconButton(onPressed: () async {
-                            _videoPlayerController.play();
-                          }, icon: Icon(Icons.play_arrow_rounded,
-                            color: Colors.white,
-                          ),
-                          ),
-                          IconButton(onPressed: () async {
-                            Duration d=await _videoPlayerController.getPosition();
-                            int i=d.inSeconds.toInt()-10;
-                            _videoPlayerController.seekTo(Duration(seconds: i,));
-                          }, icon: Icon(Icons.fast_rewind_rounded,
-                            color: Colors.white,
-                          ),
-                          ),
-                          IconButton(onPressed: () async {
-                            Duration d=await _videoPlayerController.getPosition();
-                            int i=d.inSeconds.toInt()+10;
-                            _videoPlayerController.seekTo(Duration(seconds: i,));
-                          }, icon: Icon(Icons.fast_forward_rounded,
-                            color: Colors.white,),
-                          ),
-
-                          IconButton(onPressed: () async {
-                            _videoPlayerController.setVolume(0);
-                          }, icon: Icon(Icons.volume_off,
-                            color: Colors.white,
-                          ),
-                          ),
-                          IconButton(onPressed: () async {
-                            _videoPlayerController.setVolume(100);
-                          }, icon: Icon(Icons.volume_up,
-                            color: Colors.white,),
-                          ),
-
-                          InkWell(
-                            onTap:(){
-                              _videoPlayerController.setPlaybackSpeed(0.5);
-
-                            },
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              color: Colors.white,
-                              child: Center(
-                                child: Text("0.5"),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              _videoPlayerController.setPlaybackSpeed(1.75);
-                            },
-
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              color: Colors.white,
-                              child: Center(
-                                child: Text("1.75",
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                autoPlay: true,
+                looping: false,
+                autoDispose: true,
+                controlsConfiguration: BetterPlayerControlsConfiguration(
+                  controlBarColor: Colors.blueGrey,
+                  iconsColor: Colors.white,
+                  enablePip: true,
                 ),
               ),
+            ),
+
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: IconButton(onPressed: () {
+                setState(() {
+                  floating.enable();
+                });
+              }, icon: Icon(Icons.picture_in_picture)),
             )
           ],
         ),
