@@ -31,6 +31,21 @@ class _DashboardState extends State<Dashboard> {
 
 
 
+
+  Future<String> liveStream() async {
+    final yt=YoutubeExplode();
+    String streams;
+    try{
+      VideoId a=VideoId('QTtsjyFGCWo');
+      streams= await yt.videos.streamsClient.getHttpLiveStreamUrl(a);
+      print("url is $streams");
+    }
+    finally{
+
+    }
+    return streams;
+  }
+
   Future<String> convertToHLS() async {
     // Initialize YouTubeExplode
     final yt = YoutubeExplode();
@@ -392,101 +407,83 @@ class _DashboardState extends State<Dashboard> {
 
 
 
-                              Container(
-                                width: 328,
-                                height: 64,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16),
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    color: Colors.grey.withOpacity(0.6),
-                                    width:0.5,
+                              InkWell(
+                                onTap: () async {
+                                  String a=await liveStream();
+                                  Navigator.of(context).push(MaterialPageRoute(builder:(context)=>Video_Player_Page(a)));
+                                },
+                                child: Container(
+                                  width: 328,
+                                  height: 64,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      color: Colors.grey.withOpacity(0.6),
+                                      width:0.5,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+
+                                        color: Color(0x22000000), // Black color with 8% opacity
+                                        offset: Offset(0, 2), // X: 0, Y: 2
+                                        blurRadius: 10, // Blur radius
+                                        spreadRadius: 0, // Spread radius
+
+                                      ),
+                                    ],
                                   ),
-                                  boxShadow: [
-                                    BoxShadow(
+                                  child: Stack(
+                                    children: [
+                                      Align(
+                                        alignment:Alignment.centerLeft,
+                                        child: Container(
+                                          width: 64,
+                                          height: 64,
 
-                                      color: Color(0x22000000), // Black color with 8% opacity
-                                      offset: Offset(0, 2), // X: 0, Y: 2
-                                      blurRadius: 10, // Blur radius
-                                      spreadRadius: 0, // Spread radius
-
-                                    ),
-                                  ],
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Align(
-                                      alignment:Alignment.centerLeft,
-                                      child: Container(
-                                        width: 64,
-                                        height: 64,
-
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(image: AssetImage("assets/india.png"),fit: BoxFit.fill,),
-                                          borderRadius: BorderRadius.circular(16),
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(image: AssetImage("assets/india.png"),fit: BoxFit.fill,),
+                                            borderRadius: BorderRadius.circular(16),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Align(
-                                      alignment:Alignment.centerRight,
-                                      child: Container(
-                                        width: 64,
-                                        height: 64,
+                                      Align(
+                                        alignment:Alignment.centerRight,
+                                        child: Container(
+                                          width: 64,
+                                          height: 64,
 
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(image: AssetImage("assets/england.png"),fit: BoxFit.fill,),
-                                          borderRadius: BorderRadius.circular(16),
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(image: AssetImage("assets/england.png"),fit: BoxFit.fill,),
+                                            borderRadius: BorderRadius.circular(16),
+                                          ),
                                         ),
                                       ),
-                                    ),
 
 
-                                    Row(
-                                      children: [
-                                        SizedBox(width:10,),
-                                      Container(
-                                        width:40,
-                                        height:40,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(image: AssetImage("assets/dclogo.png"),fit: BoxFit.fill,),
-                                          shape: BoxShape.circle,
-                                        ),
-                                      ),
-                                        Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text("India",
-                                              style: GoogleFonts.inter(
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.black,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                            Text("208-1 (19.5)",
-                                              style: GoogleFonts.inter(
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.black,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Expanded(child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
+                                      Row(
                                         children: [
+                                          SizedBox(width:10,),
+                                        Container(
+                                          width:40,
+                                          height:40,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(image: AssetImage("assets/dclogo.png"),fit: BoxFit.fill,),
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
                                           Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text("England",
+                                              Text("India",
                                                 style: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w400,
                                                   color: Colors.black,
                                                   fontSize: 14,
                                                 ),
                                               ),
-                                              Text("105-1 (20)",
+                                              Text("208-1 (19.5)",
                                                 style: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w500,
                                                   color: Colors.black,
@@ -495,24 +492,48 @@ class _DashboardState extends State<Dashboard> {
                                               ),
                                             ],
                                           ),
-
-                                          Container(
-                                            width:40,
-                                            height:40,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(image: AssetImage("assets/gtlogo.png"),fit: BoxFit.fill,),
-                                              shape: BoxShape.circle,
+                                          Expanded(child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              children: [
+                                                Text("England",
+                                                  style: GoogleFonts.inter(
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                                Text("105-1 (20)",
+                                                  style: GoogleFonts.inter(
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
+
+                                            Container(
+                                              width:40,
+                                              height:40,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(image: AssetImage("assets/gtlogo.png"),fit: BoxFit.fill,),
+                                                shape: BoxShape.circle,
+                                              ),
+                                            ),
+
+                                            SizedBox(width:10,),
+                                          ],
+                                          ),
                                           ),
 
-                                          SizedBox(width:10,),
                                         ],
-                                        ),
-                                        ),
-
-                                      ],
-                                    ),
-                                  ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               SizedBox(
